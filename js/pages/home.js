@@ -15,7 +15,8 @@ export default function Home() {
       margin: "1rem 0"
     }),
     a(text("Learn AWFF"))
-    .attr("href", "https://github.com/diego-42")
+    .attr("href", "https://diego-42.github.io/awff/")
+    .attr("target", "_blank")
     .css({
       marginTop: "2rem",
       color: "#232332"
