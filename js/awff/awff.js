@@ -20,6 +20,11 @@ function tag(name, ...children) {
     return this;
   }
 
+  tag.append = function (child) {
+    this.appendChild(child);
+    return this;
+  }
+
   tag.event = function(name, callback) {
     this.addEventListener(name, callback, false);
 
@@ -30,7 +35,7 @@ function tag(name, ...children) {
 }
 
 function text(value) {
-  return document.createTextNode(value);
+  return document.createTextNode(value ? value : "");
 }
 
 
@@ -220,16 +225,16 @@ function dt(...children) {
   return tag("dt", ...children);
 }
 
-function dt(...children) {
-  return tag("dt", ...children);
-}
-
-function table(...children) {
-  return tag("table", ...children);
+function dd(...children) {
+  return tag("dd", ...children);
 }
 
 function caption(...children) {
   return tag("caption", ...children);
+}
+
+function table(...children) {
+  return tag("table", ...children);
 }
 
 function th(...children) {
@@ -326,6 +331,8 @@ function default404(page) {
 
 function syncHash(routes) {
   let hash = document.location.hash.split("#")[1];
+
+  if(hash && !hash.includes("/")) return 
 
   if(!hash) hash = "/";
   if(!routes["/404"]) routes["/404"] = default404;
