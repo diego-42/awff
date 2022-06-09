@@ -1,8 +1,7 @@
-root = document.getElementById("root");
+const root = document.getElementById("root");
 
-function render(...children) {
-  while(root.firstChild) root.removeChild(root.firstChild);
-  for(const child of children) root.appendChild(child);
+function render(app) {
+  root.appendChild(app);
 }
 
 function tag(name, ...children) {
@@ -329,18 +328,22 @@ function default404(page) {
     });
 }
 
-function syncHash(routes) {
-  let hash = document.location.hash.split("#")[1];
-
-  if(hash && !hash.includes("/")) return 
-
-  if(!hash) hash = "/";
-  if(!routes["/404"]) routes["/404"] = default404;
-
-  render(routes[hash] ? routes[hash](hash.replace("/", "")) : routes["/404"](hash));
-}
-
 function router(routes) {
-  window.addEventListener("hashchange", () => syncHash(routes));
-  syncHash(routes);
+  const wrapper = div();
+
+  wrapper.syncHash = function () {
+    let hash = document.location.hash.split("#")[1];
+  
+    if(!hash) hash = "/";
+    if(!routes["/404"]) routes["/404"] = default404;
+
+    while(this.firstChild) this.removeChild(this.firstChild);
+    this.append(routes[hash] ? routes[hash](hash.replace("/", "")) : routes["/404"](hash));
+
+    return this;
+  }
+
+  window.addEventListener("hashchange", () => { wrapper.syncHash(); });
+
+  return wrapper;
 }

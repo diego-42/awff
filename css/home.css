@@ -2,7 +2,8 @@
   font-size: 2.5rem;
   font-weight: bold;
 
-  margin-bottom: 1.5rem 0;
+  width: fit-content;
+
 }
 
 .p_title {
@@ -22,12 +23,15 @@
 
 .p_line {
   margin-left: 2rem;
+  margin-top: 1rem;
 }
 
 .scroll {
   background: none;
   border: none;
   border-bottom: 2px solid #aaa;
+  
+  margin-right: 1rem;
 
   font-size: 1rem;
 
@@ -40,10 +44,6 @@
   border-bottom: 2px solid #ff2323;
 }
 
-.short {
-  max-width: 10rem;
-  margin-left: 0;
-}
 
 .funcs {
   list-style-type: none;
@@ -53,9 +53,14 @@
 .func_item {
   display: block;
 }
+
 .method_item {
   display: block;
   margin-left: 2rem;
+}
+
+.flex {
+  display: flex;
 }
 
 ul {
@@ -87,7 +92,7 @@ a {
 
 code {
   background-color: #eee;
-  padding: 1rem;
+  padding: .5rem 1rem;
   border-radius: 1rem;
 
   margin: 1rem;
